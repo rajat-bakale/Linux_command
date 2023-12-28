@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# Function to display manual page
+display_manual() {
+    echo "MANUAL PAGE FOR internsctl"
+    # Include other manual page details if needed
+}
+
+# Function to display help information
+display_help() {
+    echo "Usage: internsctl [OPTIONS]"
+    echo "Options:"
+    echo "  cpu getinfo    Display CPU information"
+    echo "  memory getinfo Display memory information"
+    # Add other options if required
+}
+
+# Function to get CPU information
+get_cpu_info() {
+    lscpu
+}
+
+# Function to get memory information
+get_memory_info() {
+    free
+}
+
+# Main script logic
+if [[ $# -eq 0 ]]; then
+    display_help
+    exit 1
+fi
+
+case "$1" in
+    "cpu")
+        case "$2" in
+            "getinfo")
+                get_cpu_info
+                ;;
+            *)
+                echo "Invalid option for 'cpu'. Use 'internsctl cpu getinfo'"
+                ;;
+        esac
+        ;;
+    "memory")
+        case "$2" in
+            "getinfo")
+                get_memory_info
+                ;;
+            *)
+                echo "Invalid option for 'memory'. Use 'internsctl memory getinfo'"
+                ;;
+        esac
+        ;;
+    *)
+        echo "Invalid command. Use 'internsctl cpu getinfo' or 'internsctl memory getinfo'"
+        ;;
+esac
